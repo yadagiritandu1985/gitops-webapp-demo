@@ -1,26 +1,45 @@
-apiVersion: v1
+# apiVersion: v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     app: gitops-webapp
+#   name: gitops-webapp
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: gitops-webapp
+#   template:
+#     metadata:
+#       labels:
+#         app: gitops-webapp
+#     spec:
+#       containers:
+#       - image: paulbouwer/hello-kubernetes:1.8
+#         name: gitops-webapp
+#         imagePullPolicy: Always
+#         ports:
+#         - containerPort: 5000
+#           name: http
+#         env:
+#         - name: APP_PORT
+#           value: "5000"
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: gitops-webapp
-  name: gitops-webapp
+  name: nginx-deployment
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: gitops-webapp
+      app: nginx
   template:
     metadata:
       labels:
-        app: gitops-webapp
+        app: nginx
     spec:
       containers:
-      - image: paulbouwer/hello-kubernetes:1.8
-        name: gitops-webapp
-        imagePullPolicy: Always
+      - name: nginx-container
+        image: nginx:latest
         ports:
-        - containerPort: 5000
-          name: http
-        env:
-        - name: APP_PORT
-          value: "5000"
+        - containerPort: 80
